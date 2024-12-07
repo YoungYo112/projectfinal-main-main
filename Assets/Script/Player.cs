@@ -55,5 +55,9 @@ public class Player : Character, Ishootable
                 SceneManager.LoadScene(nextScene);
             }
         }
+        else if (other.gameObject.tag == "Boundary")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
