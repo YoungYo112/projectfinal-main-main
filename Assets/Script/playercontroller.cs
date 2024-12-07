@@ -8,6 +8,7 @@ public class playercontroller : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 move;
     float moveX;
+    public bool onGround;
     [SerializeField] float speed;
     [SerializeField] float jumpSpeed;
 
@@ -27,13 +28,19 @@ public class playercontroller : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             rb.velocity = new Vector2(0, jumpSpeed);
+            onGround = false;
         }
-       
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            onGround = true;
+        }
+    }
 
 
 }
